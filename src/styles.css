@@ -142,3 +142,127 @@
     color: var(--color-foreground);
   }
 }
+
+/* ---------- Weather dashboard design system ---------- */
+:root {
+  --background: oklch(0.17 0.045 265);
+  --foreground: oklch(0.97 0.008 250);
+  --card: oklch(0.24 0.05 265 / 55%);
+  --card-foreground: oklch(0.97 0.008 250);
+  --popover: oklch(0.22 0.05 265);
+  --popover-foreground: oklch(0.97 0.008 250);
+  --primary: oklch(0.62 0.19 265);
+  --primary-foreground: oklch(0.99 0.005 250);
+  --secondary: oklch(0.28 0.05 265);
+  --secondary-foreground: oklch(0.97 0.008 250);
+  --muted: oklch(0.28 0.045 265);
+  --muted-foreground: oklch(0.74 0.03 250);
+  --accent: oklch(0.78 0.14 210);
+  --accent-foreground: oklch(0.18 0.05 265);
+  --accent-glow: oklch(0.78 0.14 210 / 45%);
+  --warning: oklch(0.83 0.15 75);
+  --warning-foreground: oklch(0.2 0.05 265);
+  --destructive: oklch(0.63 0.21 25);
+  --destructive-foreground: oklch(0.99 0.005 250);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.78 0.14 210);
+  --sky-1: oklch(0.55 0.2 265 / 30%);
+  --sky-2: oklch(0.7 0.16 210 / 22%);
+}
+
+@theme inline {
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-accent-glow: var(--accent-glow);
+}
+
+@utility glass {
+  background-color: var(--card);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(18px);
+  box-shadow: 0 18px 40px -24px oklch(0 0 0 / 70%);
+}
+
+@utility glow-ring {
+  box-shadow: 0 0 32px -6px var(--accent-glow);
+}
+
+@utility focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@utility sky-backdrop {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60rem 40rem at 15% -10%, var(--sky-1), transparent 70%),
+    radial-gradient(50rem 35rem at 90% 0%, var(--sky-2), transparent 70%);
+  transition: background 600ms ease;
+}
+
+@utility weather-aura {
+  position: absolute;
+  inset: -40% -20% auto -20%;
+  height: 22rem;
+  background: radial-gradient(closest-side, var(--sky-2), transparent 75%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+@utility scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+[data-weather="clear"] {
+  --sky-1: oklch(0.62 0.18 250 / 32%);
+  --sky-2: oklch(0.82 0.14 205 / 26%);
+}
+[data-weather="cloudy"],
+[data-weather="fog"] {
+  --sky-1: oklch(0.5 0.06 255 / 30%);
+  --sky-2: oklch(0.65 0.05 230 / 20%);
+}
+[data-weather="rain"],
+[data-weather="drizzle"] {
+  --sky-1: oklch(0.45 0.12 250 / 34%);
+  --sky-2: oklch(0.6 0.12 225 / 22%);
+}
+[data-weather="thunder"] {
+  --sky-1: oklch(0.32 0.1 285 / 40%);
+  --sky-2: oklch(0.4 0.09 265 / 26%);
+}
+[data-weather="snow"] {
+  --sky-1: oklch(0.7 0.06 230 / 26%);
+  --sky-2: oklch(0.85 0.04 220 / 22%);
+}
+
+@keyframes weather-rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility animate-rise {
+  animation: weather-rise 420ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
