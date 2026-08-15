@@ -57,7 +57,7 @@ export function relativeTime(timestamp: number, now: number = Date.now()): strin
   return `Updated ${hours} hour${hours === 1 ? "" : "s"} ago`;
 }
 
-export function locationLabel(loc: { admin1?: string; country: string }): string {
+export function locationLabel(loc: { admin1?: string | undefined; country: string }): string {
   return [loc.admin1, loc.country].filter(Boolean).join(", ");
 }
 
