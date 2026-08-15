@@ -3,9 +3,9 @@ export type TemperatureUnit = "C" | "F";
 export interface GeoLocation {
   id: string;
   name: string;
-  admin1?: string;
+  admin1?: string | undefined;
   country: string;
-  countryCode?: string;
+  countryCode?: string | undefined;
   latitude: number;
   longitude: number;
   timezone: string;
@@ -52,9 +52,9 @@ export interface WeatherResponse {
 export interface StoredLocation {
   id: string;
   name: string;
-  admin1?: string;
+  admin1?: string | undefined;
   country: string;
-  countryCode?: string;
+  countryCode?: string | undefined;
   latitude: number;
   longitude: number;
   timezone: string;
